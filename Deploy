@@ -61,11 +61,11 @@ function ImageMagick ()
 function bellsoft-java8 ()
 {
   echo "Installing bellsoft-java8 . . ."
-  wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
+  apt-ley list | egrep '99A5 C88E 3C5B 1FA8 B05A  19D3 32E9 7501 79FC EA62' || \
+    wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
   stat tee /etc/apt/sources.list.d/bellsoft.list || \
     echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | tee /etc/apt/sources.list.d/bellsoft.list
-  apt-get update
-  apt-get install bellsoft-java8-full
+  apt-get update && apt-get install bellsoft-java8-full
   #    2. Set JAVA_HOME
   export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
   egrep "${JAVA_HOME}" /etc/profile || echo "${JAVA_HOME}" >> /etc/.profile
@@ -73,13 +73,9 @@ function bellsoft-java8 ()
 }
 
 sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-apt-get update
-#sudo apt-get upgrade -y 
-apt-get --fix-broken install -y
-apt-get install -y default-jdk testdisk build-essential autoconf libtool git-core
-#apt-get install -y testdisk
+apt-get update && apt-get --fix-broken install -y && \
+  apt-get install -y default-jdk testdisk build-essential autoconf libtool git-core
 apt autoremove -y
-#apt-get install -y build-essential autoconf libtool git-core
 apt-get build-dep -y imagemagick libmagickcore-dev libde265 libheif
 
 
@@ -93,7 +89,7 @@ stat /usr/lib/jvm/bellsoft-java8-full-amd64 || bellsoft-java8
 
 
 apt --fix-broken install -y
-apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev libafflib-dev libewf-dev libvmdk1 libvhdi1 libewf2 libafflib0v5
+apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev libafflib-dev libewf-dev libvmdk1 libvhdi1 libewf2 libafflib0v5 libvhdi-dev
 
 stat /root/autopsy-4.17.0 || unzip /Downloads/autopsy-4.17.0.zip -d /root/
 dpkg -s sleuthkit-java || dpkg -i /Downloads/sleuthkit-java_4.10.1-1_amd64.deb
