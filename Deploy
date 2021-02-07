@@ -17,54 +17,55 @@ __EOD__
 
 fi
 
-sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-sudo apt-get update
+sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+apt-get update
 #sudo apt-get upgrade -y 
-sudo apt-get --fix-broken install -y
-sudo apt-get install -y default-jdk
-sudo apt-get install -y testdisk
-sudo apt autoremove -t
-sudo apt-get update
-sudo apt-get install build-essential autoconf libtool git-core
-sudo apt-get build-dep imagemagick libmagickcore-dev libde265 libheif
+apt-get --fix-broken install -y
+apt-get install -y default-jdk
+apt-get install -y testdisk
+apt autoremove -t
+apt-get update
+apt-get install build-essential autoconf libtool git-core
+apt-get build-dep imagemagick libmagickcore-dev libde265 libheif
 cd /usr/src/
 
-sudo git clone https://github.com/strukturag/libde265.git
-sudo git clone https://github.com/strukturag/libheif.git
+git clone https://github.com/strukturag/libde265.git
+git clone https://github.com/strukturag/libheif.git
 
 cd libde265/
-sudo ./autogen.sh
-sudo ./configure
-sudo make
-sudo make install
+./autogen.sh
+./configure
+make
+make install
 
 cd /usr/src/libheif/
-sudo ./autogen.sh
-sudo ./configure
-sudo make
-sudo make install
+./autogen.sh
+./configure
+make
+make install
 
 cd /usr/src/
-sudo wget https://www.imagemagick.org/download/ImageMagick.tar.gz
-sudo tar xf ImageMagick.tar.gz
+wget https://www.imagemagick.org/download/ImageMagick.tar.gz
+tar xf ImageMagick.tar.gz
 
 cd ImageMagick-7*
-sudo ./configure --with-heic=yes
-sudo make
-sudo make install
+./configure --with-heic=yes
+make
+make install
 
-sudo ldconfig
+ldconfig
 
 wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | sudo apt-key add -
-sudo echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | sudo tee /etc/apt/sources.list.d/bellsoft.list
-sudo apt-get update
-sudo apt-get install bellsoft-java8-full
+egrep 'export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64' || \
+    echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | sudo tee /etc/apt/sources.list.d/bellsoft.list
+apt-get update
+apt-get install bellsoft-java8-full
 #    2. Set JAVA_HOME
 export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
 
-apt --fix-broken install -y libewf2 
-sudo apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev libafflib-dev libewf-dev libvmdk1 libvhdi1 libewf2 libafflib0v5
+apt --fix-broken install -y
+apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev libafflib-dev libewf-dev libvmdk1 libvhdi1 libewf2 libafflib0v5
 
 cd /root
-sudo unzip /Downloads/autopsy-4.17.0.zip
+unzip /Downloads/autopsy-4.17.0.zip
 dpkg -i /Downloads/sleuthkit-java_4.10.1-1_amd64.deb
