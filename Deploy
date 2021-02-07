@@ -81,7 +81,7 @@ apt-get build-dep -y imagemagick libmagickcore-dev libde265 libheif
 
 stat /usr/src/libde265 || strukturag libde265
 stat /usr/src/libheif || strukturag libheif
-stat /usr/src/ImageMagick || ImageMagick
+stat /usr/src/ImageMagick-7.0.10-61 || ImageMagick
 
 ldconfig
 
