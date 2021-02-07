@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+#  Deploy
+#
+#  Deploys Sleuth-Autopsy onto Ubuntu for UCI class on Autopsy.
+#
+#    This script needs some cleaning up and documentation, but
+#    suffices for now to get students up and running.
+#
+
 echo 'Starting . . .'
 
 if [[ $(id -u) -ne 0 ]]
@@ -10,7 +18,11 @@ then
 
   Run as:
 
-    sudo bash -c $(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)
+    sudo bash -c $(curl -s "https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
+
+    or for development:
+
+    sudo bash -c $(curl -s "https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
 
 
 __EOD__
@@ -68,7 +80,7 @@ function bellsoft-java8 ()
   apt-get update && apt-get install bellsoft-java8-full
   #    2. Set JAVA_HOME
   export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
-  egrep "export JAVA_HOME={JAVA_HOME}" /etc/profile || echo "export JAVA_HOME={JAVA_HOME}" >> /etc/profile
+  egrep "export JAVA_HOME={$JAVA_HOME}" /etc/profile || echo "export JAVA_HOME=${JAVA_HOME}" >> /etc/profile
   echo "done . . ."
 }
 
@@ -95,7 +107,7 @@ stat /root/autopsy-4.17.0 || unzip /Downloads/autopsy-4.17.0.zip -d /root/
 dpkg -s sleuthkit-java || dpkg -i /Downloads/sleuthkit-java_4.10.1-1_amd64.deb
 
 export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
-egrep "export JAVA_HOME={JAVA_HOME}" /etc/profile || echo "export JAVA_HOME={JAVA_HOME}" >> /etc/profile
+egrep "export JAVA_HOME=${JAVA_HOME}" /etc/profile || echo "export JAVA_HOME=${JAVA_HOME}" >> /etc/profile
 
 source /etc/profile
 cd /root/autopsy-4.17.0 && sh ./linux_setup.sh
