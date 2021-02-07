@@ -116,11 +116,12 @@ cat <<__EOD__
 
   To run autopsy:
 
-    1.  source /etc/profile
-    2.  cd /root/autopsy-4.17.0
-    3.  sh ./unix_setup.sh
-    4.  bin/autopsy
-    5.  Yes - If window pops-up asking about enabling the main library.
+    1.  sudo su -
+    2.  source /etc/profile
+    3.  cd /root/autopsy-4.17.0
+    4.  sh ./unix_setup.sh
+    5.  bin/autopsy
+    6.  Yes - If window pops-up asking about enabling the main library.
 
 __EOD__
 
