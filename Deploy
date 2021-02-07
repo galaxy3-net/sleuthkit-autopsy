@@ -94,5 +94,5 @@ stat /usr/lib/jvm/bellsoft-java8-full-amd64 || bellsoft-java8
 apt --fix-broken install -y
 apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev libafflib-dev libewf-dev libvmdk1 libvhdi1 libewf2 libafflib0v5
 
-stat /root/ || unzip /Downloads/autopsy-4.17.0.zip -d /root/
+stat /root/autopsy-4.17.0 || unzip /Downloads/autopsy-4.17.0.zip -d /root/
 dpkg -s sleuthkit-java || dpkg -i /Downloads/sleuthkit-java_4.10.1-1_amd64.deb
