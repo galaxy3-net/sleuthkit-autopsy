@@ -8,7 +8,7 @@ then
 
   Run as:
 
-  sudo -c bash $(curl -s
+  sudo -c bash $(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)
 
 __EOD__
 
