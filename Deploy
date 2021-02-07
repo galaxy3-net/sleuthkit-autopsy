@@ -68,7 +68,7 @@ function bellsoft-java8 ()
   apt-get update && apt-get install bellsoft-java8-full
   #    2. Set JAVA_HOME
   export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
-  egrep "${JAVA_HOME}" /etc/profile || echo "${JAVA_HOME}" >> /etc/.profile
+  egrep "${JAVA_HOME}" /etc/profile || echo "${JAVA_HOME}" >> /etc/profile
   echo "done . . ."
 }
 
@@ -95,4 +95,4 @@ stat /root/autopsy-4.17.0 || unzip /Downloads/autopsy-4.17.0.zip -d /root/
 dpkg -s sleuthkit-java || dpkg -i /Downloads/sleuthkit-java_4.10.1-1_amd64.deb
 
 export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
-egrep "${JAVA_HOME}" /etc/profile || echo "${JAVA_HOME}" >> /etc/.profile
+egrep "${JAVA_HOME}" /etc/profile || echo "${JAVA_HOME}" >> /etc/profile
