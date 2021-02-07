@@ -61,13 +61,14 @@ function ImageMagick ()
 function bellsoft-java8 ()
 {
   echo "Installing bellsoft-java8 . . ."
-  wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | sudo apt-key add -
-  egrep 'export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64' || \
-      echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | sudo tee /etc/apt/sources.list.d/bellsoft.list
+  wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
+  stat tee /etc/apt/sources.list.d/bellsoft.list || \
+    echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | tee /etc/apt/sources.list.d/bellsoft.list
   apt-get update
   apt-get install bellsoft-java8-full
   #    2. Set JAVA_HOME
   export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
+  egrep "${JAVA_HOME}" /etc/profile || echo "${JAVA_HOME}" >> /etc/.profile
   echo "done . . ."
 }
 
