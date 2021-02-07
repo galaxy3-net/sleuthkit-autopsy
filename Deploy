@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo 'Starting . . .'
+
 if [[ $(id -u) -ne 0 ]]
 then
   cat <<__EOD__
