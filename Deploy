@@ -1,4 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+#  Deploy
+#
+#  Deploys Sleuth-Autopsy onto Ubuntu for UCI class on Autopsy.
+#
+#    This script needs some cleaning up and documentation, but
+#    suffices for now to get students up and running.
+#
+
+echo 'Starting . . .'
 
 if [[ $(id -u) -ne 0 ]]
 then
@@ -8,7 +18,12 @@ then
 
   Run as:
 
-  sudo -c bash $(curl -s
+    sudo bash -c $(curl -s "https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
+
+    or for development:
+
+    sudo bash -c $(curl -s "https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
+
 
 __EOD__
 
@@ -16,56 +31,97 @@ __EOD__
 
 fi
 
-exit
+function strukturag ()
+{
+  echo "Installing ${1} . . ."
+  git clone https://github.com/strukturag/${1}.git /usr/src/${1}/
 
-sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-sudo apt-get update
-#sudo apt-get upgrade -y 
-sudo apt-get --fix-broken install -y
-sudo apt-get install -y default-jdk
-sudo apt-get install -y testdisk
-sudo apt autoremove -t
-sudo apt-get update
-sudo apt-get install build-essential autoconf libtool git-core
-sudo apt-get build-dep imagemagick libmagickcore-dev libde265 libheif
-cd /usr/src/
+  cd /usr/src/${1}/
+  ./autogen.sh
+  ./configure
+  make
+  make install
+  echo "done . . ."
+}
 
-sudo git clone https://github.com/strukturag/libde265.git
-sudo git clone https://github.com/strukturag/libheif.git
+function libheif ()
+{
+  git clone https://github.com/strukturag/libheif.git /usr/src/libheif/
 
-cd libde265/
-sudo ./autogen.sh
-sudo ./configure
-sudo make
-sudo make install
+  cd /usr/src/libheif/
+  ./autogen.sh
+  ./configure
+  make
+  make install
+  echo "done . . ."
+}
 
-cd /usr/src/libheif/
-sudo ./autogen.sh
-sudo ./configure
-sudo make
-sudo make install
+function ImageMagick ()
+{
+  echo "Installing ImageMagick . . ."
+  cd /usr/src/
+  wget https://www.imagemagick.org/download/ImageMagick.tar.gz
+  tar xf ImageMagick.tar.gz
 
-cd /usr/src/
-sudo wget https://www.imagemagick.org/download/ImageMagick.tar.gz
-sudo tar xf ImageMagick.tar.gz
+  cd ImageMagick-7*
+  ./configure --with-heic=yes
+  make
+  make install
+  echo "done . . ."
+}
 
-cd ImageMagick-7*
-sudo ./configure --with-heic=yes
-sudo make
-sudo make install
+function bellsoft-java8 ()
+{
+  echo "Installing bellsoft-java8 . . ."
+  apt-ley list | egrep '99A5 C88E 3C5B 1FA8 B05A  19D3 32E9 7501 79FC EA62' || \
+    wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
+  stat tee /etc/apt/sources.list.d/bellsoft.list || \
+    echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | tee /etc/apt/sources.list.d/bellsoft.list
+  apt-get update && apt-get install bellsoft-java8-full
+  #    2. Set JAVA_HOME
+  export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
+  egrep "export JAVA_HOME={$JAVA_HOME}" /etc/profile || echo "export JAVA_HOME=${JAVA_HOME}" >> /etc/profile
+  echo "done . . ."
+}
 
-sudo ldconfig
+sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+apt-get update && apt-get --fix-broken install -y && \
+  apt-get install -y default-jdk testdisk build-essential autoconf libtool git-core
+apt autoremove -y
+apt-get build-dep -y imagemagick libmagickcore-dev libde265 libheif
 
-wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | sudo apt-key add -
-sudo echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | sudo tee /etc/apt/sources.list.d/bellsoft.list
-sudo apt-get update
-sudo apt-get install bellsoft-java8-full
-#    2. Set JAVA_HOME
+
+stat /usr/src/libde265 || strukturag libde265
+stat /usr/src/libheif || strukturag libheif
+stat /usr/src/ImageMagick-7.0.10-61 || ImageMagick
+
+ldconfig
+
+stat /usr/lib/jvm/bellsoft-java8-full-amd64 || bellsoft-java8
+
+
+apt --fix-broken install -y
+apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev libafflib-dev libewf-dev libvmdk1 libvhdi1 libewf2 libafflib0v5 libvhdi-dev
+
+stat /root/autopsy-4.17.0 || unzip /Downloads/autopsy-4.17.0.zip -d /root/
+dpkg -s sleuthkit-java || dpkg -i /Downloads/sleuthkit-java_4.10.1-1_amd64.deb
+
 export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
+egrep "export JAVA_HOME=${JAVA_HOME}" /etc/profile || echo "export JAVA_HOME=${JAVA_HOME}" >> /etc/profile
 
-apt --fix-broken install -y libewf2 
-sudo apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev libafflib-dev libewf-dev libvmdk1 libvhdi1 libewf2 libafflib0v5
+source /etc/profile
+cd /root/autopsy-4.17.0 && sh ./unix_setup.sh
 
-cd /root
-sudo unzip /Downloads/autopsy-4.17.0.zip
-dpkg -i /Downloads/sleuthkit-java_4.10.1-1_amd64.deb
+cat <<__EOD__
+
+  To run autopsy:
+
+    1.  sudo su -
+    2.  source /etc/profile
+    3.  cd /root/autopsy-4.17.0
+    4.  sh ./unix_setup.sh
+    5.  bin/autopsy
+    6.  Yes - If window pops-up asking about enabling the main library.
+
+__EOD__
+
