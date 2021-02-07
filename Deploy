@@ -8,15 +8,14 @@ then
 
   Run as:
 
-  sudo -c bash $(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)
+    sudo bash -c $(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)
+
 
 __EOD__
 
   exit 1
 
 fi
-
-exit
 
 sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 sudo apt-get update
