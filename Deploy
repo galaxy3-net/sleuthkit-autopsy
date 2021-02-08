@@ -120,7 +120,7 @@ apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev liba
 stat ${TMPDIR}/autopsy-4.17.0 || unzip ${TMPDIR}/autopsy-4.17.0.zip -d ${TMPDIR}
 dpkg -s sleuthkit-java || dpkg -i ${TMPDIR}/sleuthkit-java_4.10.1-1_amd64.deb
 
-export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+#export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
 egrep "export JAVA_HOME=${JAVA_HOME}" /etc/profile || echo "export JAVA_HOME=${JAVA_HOME}" >> /etc/profile
 
