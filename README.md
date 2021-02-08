@@ -7,10 +7,10 @@ Deploy from the production version or development version based on the commands 
 This deployment currently only works on the UCIBOX (Trilogy Vagrant Machine).  Deployments to the Kali Linux boxes in the Galaxy3 lab or Azure lab are going to take more time to devlope.
 
 ### Production
-sudo bash -c $(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)
+sudo bash -c "$(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
 
 ### Development
-sudo bash -c $(https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/dev/Deploy)
+sudo bash -c "$(https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/dev/Deploy)"
 
 
 ## Post Deployment
