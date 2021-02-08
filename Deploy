@@ -87,7 +87,7 @@ function bellsoft-java8 ()
 function download ()
 {
   mkdir -p $(dirname ${1})
-  stats ${1} && return
+  stat ${1} && return
   curl -o ${1} ${2}
 }
 
