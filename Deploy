@@ -84,6 +84,13 @@ function bellsoft-java8 ()
   echo "done . . ."
 }
 
+function download ()
+{
+  mkdir -p $(dirname ${1})
+  stats ${1} && return
+  curl -o ${1} ${2}
+}
+
 sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 apt-get update && apt-get --fix-broken install -y && \
   apt-get install -y default-jdk testdisk build-essential autoconf libtool git-core
@@ -112,6 +119,54 @@ egrep "export JAVA_HOME=${JAVA_HOME}" /etc/profile || echo "export JAVA_HOME=${J
 source /etc/profile
 cd /root/autopsy-4.17.0 && sh ./unix_setup.sh
 
+# https://digitalcorpora.org/corpora/scenarios/national-gallery-dc-2012-attack
+
+download /root/corpus/tracy-phone-2012-07-15-final.E01 http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/tracy-phone/tracy-phone-2012-07-15-final.E01
+download /root/corpus/carry-phone-2012-07-15-final.zip http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/carry-phone/carry-phone-2012-07-15-final.zip
+download /root/corpus/carry-tablet-2012-07-16-final.E01 http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/carry-tablet/carry-tablet-2012-07-16-final.E01
+download /root/corpus/carry-email.zip  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/email.zip
+download /root/corpus/Tracy-phone-2012-07-15-1316.L01  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/extra/tracy-phone-encase/Tracy-phone-2012-07-15-1316.L01
+download /root/corpus/tracy-external-2012-07-16-final.E01  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/tracy-external/tracy-external-2012-07-16-final.E01
+download /root/corpus/tracy-home-2012-07-16-final.E01  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/tracy-home/tracy-home-2012-07-16-final.E01
+download /root/corpus/tracy-home-2012-07-16-final.E02  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/tracy-home/tracy-home-2012-07-16-final.E02
+download /root/corpus/ngdc-exterior-2012-07-06.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-exterior-2012-07-06.pcap
+download /root/corpus/ngdc-exterior-2012-07-09.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-exterior-2012-07-09.pcap
+download /root/corpus/ngdc-exterior-2012-07-10.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-exterior-2012-07-10.pcap
+download /root/corpus/ngdc-exterior-2012-07-12.txt  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-exterior-2012-07-12.txt
+download /root/corpus/ngdc-interior-2012-07-06.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-06.pcap
+download /root/corpus/ngdc-interior-2012-07-09.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-09.pcap
+download /root/corpus/ngdc-interior-2012-07-10.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-10.pcap
+download /root/corpus/http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-12.txt
+
+# https://stix.mitre.org/language/version1.0.1/samples.html
+
+download  /root/STIX/STIX_Domain_Watchlist.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Domain_Watchlist.xml
+download  /root/STIX/STIX_Email_wAttachment.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Email_wAttachment.xml
+download  /root/STIX/STIX_Email_wFullAttachment.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Email_wFullAttachment.xml
+download  /root/STIX/STIX_Email_wLink.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Email_wLink.xml
+download  /root/STIX/STIX_FileHash_Watchlist.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_FileHash_Watchlist.xml
+download  /root/STIX/STIX_IP_Watchlist.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_IP_Watchlist.xml
+download  /root/STIX/STIX_Indicator_Snort.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Indicator_Snort.xml
+download  /root/STIX/STIX_Malware_Sample.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Malware_Sample.xml
+download  /root/STIX/STIX_Malware_Sample.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Malware_Sample.xml
+download  /root/STIX/STIX_Phishing_Indicator.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Phishing_Indicator.xml
+download  /root/STIX/STIX_Snippet_Confidence.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Snippet_Confidence.xml
+download  /root/STIX/STIX_Snippet_ControlledVocab.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Snippet_ControlledVocab.xml
+download  /root/STIX/STIX_Snippet_Controlled_Vocabulary_Specification.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Snippet_Controlled_Vocabulary_Specification.xml
+download  /root/STIX/STIX_Snippet_Handling.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Snippet_Handling.xml
+download  /root/STIX/STIX_Snippet_Sightings.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Snippet_Sightings.xml
+download  /root/STIX/STIX_Snippet_XsiType.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_Snippet_XsiType.xml
+download  /root/STIX/STIX_URL_Watchlist.xml  https://raw.github.com/STIXProject/schemas/version_1.0.1/samples/STIX_URL_Watchlist.xml
+download  /root/STIX/APT1-STIX.zip  https://stix.mitre.org/downloads/APT1-STIX.zip
+download  /root/STIX/poison_ivy-stix.zip  https://stix.mitre.org/language/version1.0.1/samples/poison_ivy-stix.zip
+
+#  https://sourceforge.net/projects/autopsy/files/NSRL/
+download  /root/NSRL-262m-Autopsy/NSRL-262-ios-Autopsy.zip  https://sourceforge.net/projects/autopsy/files/NSRL/NSRL-262-ios-Autopsy.zip/download
+download  /root/NSRL-262m-Autopsy/NSRL-262-Android-Autopsy.zip  https://sourceforge.net/projects/autopsy/files/NSRL/NSRL-262-Android-Autopsy.zip/download
+download  /root/NSRL-262m-Autopsy/NSRL/NSRL-262m-Autopsy.zip  https://sourceforge.net/projects/autopsy/files/NSRL/NSRL-262m-Autopsy.zip/download
+
+
+
 cat <<__EOD__
 
   To run autopsy:
@@ -124,4 +179,6 @@ cat <<__EOD__
     6.  Yes - If window pops-up asking about enabling the main library.
 
 __EOD__
+
+# https://digitalcorpora.org/corpora/scenarios/national-gallery-dc-2012-attack
 
