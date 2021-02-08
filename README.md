@@ -10,7 +10,7 @@ This deployment currently only works on the UCIBOX (Trilogy Vagrant Machine).  D
 sudo bash -c "$(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
 
 ### Development
-sudo bash -c "$(https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/dev/Deploy)"
+sudo bash -c "$(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/dev/Deploy)"
 
 
 ## Post Deployment
