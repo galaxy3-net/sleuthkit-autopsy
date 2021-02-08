@@ -144,7 +144,7 @@ download ${TMPDIR}/corpus/ngdc-exterior-2012-07-12.txt  http://downloads.digital
 download ${TMPDIR}/corpus/ngdc-interior-2012-07-06.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-06.pcap
 download ${TMPDIR}/corpus/ngdc-interior-2012-07-09.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-09.pcap
 download ${TMPDIR}/corpus/ngdc-interior-2012-07-10.pcap  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-10.pcap
-download ${TMPDIR}/corpus/http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-12.txt
+download ${TMPDIR}/corpus/ngdc-interior-2012-07-12.txt  http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/net/ngdc-interior-2012-07-12.txt
 
 # https://stix.mitre.org/language/version1.0.1/samples.html
 
