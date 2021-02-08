@@ -125,7 +125,7 @@ egrep "export JAVA_HOME=${JAVA_HOME}" /etc/profile || echo "export JAVA_HOME=${J
 
 source /etc/profile
 cd ${TMPDIR}/autopsy-4.17.0 && sh ./unix_setup.sh
-exit
+
 # https://digitalcorpora.org/corpora/scenarios/national-gallery-dc-2012-attack
 
 download ${TMPDIR}/corpus/tracy-phone-2012-07-15-final.E01 http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/tracy-phone/tracy-phone-2012-07-15-final.E01
@@ -180,7 +180,7 @@ cat <<__EOD__
 
     1.  sudo su -
     2.  source /etc/profile
-    3.  cd /root/autopsy-4.17.0
+    3.  cd ${TMPDIR}/autopsy-4.17.0
     4.  sh ./unix_setup.sh
     5.  bin/autopsy
     6.  Yes - If window pops-up asking about enabling the main library.
