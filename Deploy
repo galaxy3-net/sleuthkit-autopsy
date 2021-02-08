@@ -75,7 +75,7 @@ function bellsoft-java8 ()
   echo "Installing bellsoft-java8 . . ."
   apt-key list | egrep '99A5 C88E 3C5B 1FA8 B05A  19D3 32E9 7501 79FC EA62' || \
     wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
-  stat tee /etc/apt/sources.list.d/bellsoft.list || \
+  stat /etc/apt/sources.list.d/bellsoft.list || \
     echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | tee /etc/apt/sources.list.d/bellsoft.list
   apt-get update && apt-get install bellsoft-java8-full
   #    2. Set JAVA_HOME
