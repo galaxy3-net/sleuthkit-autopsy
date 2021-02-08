@@ -88,7 +88,7 @@ function download ()
 {
   mkdir -p $(dirname ${1})
   stat ${1} && return
-  curl -o ${1} ${2}
+  wget -O ${1} ${2}
 }
 
 download /tmp/autopsy-4.17.0.zip  https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.17.0/autopsy-4.17.0.zip
