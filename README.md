@@ -19,7 +19,10 @@ sudo bash -c "$(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-
 
     1.  sudo su -
     2.  source /etc/profile
-    3.  cd /root/autopsy-4.17.0
+    3.  cd /{root,vagrant}/autopsy-4.17.0
     4.  sh ./unix_setup.sh
     5.  bin/autopsy
     6.  Yes - If window pops-up asking about enabling the main library.
+    
+  Note:  Autopsy & Sleuthkit files are written to /vagrant on Vagrant machines in order to conserve
+         machine drive space.  If not a Vagrant machine, the files are in /root.

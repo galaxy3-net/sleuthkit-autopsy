@@ -107,7 +107,7 @@ apt-get build-dep -y imagemagick libmagickcore-dev libde265 libheif
 
 stat /usr/src/libde265 || strukturag libde265
 stat /usr/src/libheif || strukturag libheif
-stat /usr/src/ImageMagick-7.0.10-61 || ImageMagick
+which convert || ImageMagick
 
 ldconfig
 
@@ -117,7 +117,7 @@ stat /usr/lib/jvm/bellsoft-java8-full-amd64 || bellsoft-java8
 apt --fix-broken install -y
 apt install -y libvmdk-dev libc3p0-java libsqlite3-dev libbfio1 libbfio-dev libafflib-dev libewf-dev libvmdk1 libvhdi1 libewf2 libafflib0v5 libvhdi-dev
 
-stat ${TMPDIR}/autopsy-4.17.0 || unzip ${TMPDIR}/autopsy-4.17.0.zip -d /root/
+stat ${TMPDIR}/autopsy-4.17.0 || unzip ${TMPDIR}/autopsy-4.17.0.zip -d ${TMPDIR}
 dpkg -s sleuthkit-java || dpkg -i ${TMPDIR}/sleuthkit-java_4.10.1-1_amd64.deb
 
 export JAVA_HOME=/usr/lib/jvm/bellsoft-java8-full-amd64
