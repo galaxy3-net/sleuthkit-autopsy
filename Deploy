@@ -74,7 +74,7 @@ function bellsoft-java8 ()
 {
   echo "Installing bellsoft-java8 . . ."
   #apt-key list | egrep '99A5 C88E 3C5B 1FA8 B05A  19D3 32E9 7501 79FC EA62' || \
-    wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
+  wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add -
   stat /etc/apt/sources.list.d/bellsoft.list || \
     echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | tee /etc/apt/sources.list.d/bellsoft.list
   apt-get update && apt-get install bellsoft-java8-full
@@ -92,7 +92,7 @@ function download ()
 }
 
 #  If /vagrant exists, write Autopsy & Sleuthkit temporary files there.
-stat /vagrant && export TMPDIR=/vagrant/autopsy
+#stat /vagrant && export TMPDIR=/vagrant/autopsy
 echo "TMPDIR=${TMPDIR:=/root}"
 
 download /root/autopsy-4.17.0.zip  https://github.com/sleuthkit/autopsy/releases/download/autopsy-4.17.0/autopsy-4.17.0.zip
@@ -129,6 +129,7 @@ cd /root/autopsy-4.17.0 && sh ./unix_setup.sh
 
 # https://digitalcorpora.org/corpora/scenarios/national-gallery-dc-2012-attack
 
+exit
 download ${TMPDIR}/corpus/tracy-phone-2012-07-15-final.E01 http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/tracy-phone/tracy-phone-2012-07-15-final.E01
 download ${TMPDIR}/corpus/carry-phone-2012-07-15-final.zip http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/carry-phone/carry-phone-2012-07-15-final.zip
 download ${TMPDIR}/corpus/carry-tablet-2012-07-16-final.E01 http://downloads.digitalcorpora.org/corpora/scenarios/2012-ngdc/carry-tablet/carry-tablet-2012-07-16-final.E01
