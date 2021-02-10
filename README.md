@@ -26,3 +26,5 @@ sudo bash -c "$(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-
     
   Note:  Autopsy & Sleuthkit files are written to /vagrant on Vagrant machines in order to conserve
          machine drive space.  If not a Vagrant machine, the files are in /root.
+         
+         The case files can be found in /root/corpus or /vagrant/autopsy/corpus.

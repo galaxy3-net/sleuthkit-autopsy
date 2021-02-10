@@ -188,6 +188,8 @@ cat <<__EOD__
     5.  bin/autopsy
     6.  Yes - If window pops-up asking about enabling the main library.
 
+    The case files can be found in /root/corpus or /vagrant/autopsy/corpus.
+
 __EOD__
 
 # https://digitalcorpora.org/corpora/scenarios/national-gallery-dc-2012-attack
