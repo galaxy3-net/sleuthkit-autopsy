@@ -183,7 +183,7 @@ cat <<__EOD__
 
     1.  sudo su -
     2.  source /etc/profile
-    3.  cd ${TMPDIR}/autopsy-4.17.0
+    3.  cd /root/autopsy-4.17.0
     4.  sh ./unix_setup.sh
     5.  bin/autopsy
     6.  Yes - If window pops-up asking about enabling the main library.
