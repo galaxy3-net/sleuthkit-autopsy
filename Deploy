@@ -91,6 +91,10 @@ function download ()
   wget -O ${1} ${2}
 }
 
+apt show autopsy && apt remove autopsy -y
+apt show sleuthkit && apt remove sleuthkit -y
+apt show libtsk19 && apt remove libtsk19 -y
+
 #  If /vagrant exists, write Autopsy & Sleuthkit temporary files there.
 #stat /vagrant && export TMPDIR=/vagrant/autopsy
 echo "TMPDIR=${TMPDIR:=/root}"
