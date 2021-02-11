@@ -18,11 +18,11 @@ then
 
   Run as:
 
-    sudo bash -c $(curl -s "https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
+    sudo bash -c "$(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
 
     or for development:
 
-    sudo bash -c $(curl -s "https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
+    sudo bash -c "$(curl -s https://raw.githubusercontent.com/galaxy3-net/sleuthkit-autopsy/main/Deploy)"
 
 
 __EOD__
